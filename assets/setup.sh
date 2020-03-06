@@ -1,5 +1,5 @@
+#!/usr/bin/env bash
 set -e
-
 source /assets/colorecho
 trap "echo_red '******* ERROR: Something went wrong.'; exit 1" SIGTERM
 trap "echo_red '******* Caught SIGINT signal. Stopping...'; exit 2" SIGINT
@@ -19,14 +19,15 @@ users () {
 	echo "Configuring users"
 	groupadd -g 200 oinstall
 	groupadd -g 201 dba
-	useradd -u 440 -g oinstall -G dba -d /opt/oracle oracle
+	mkdir -p /u01/oracle
+	useradd -u 440 -g oinstall -G dba -d /u01/oracle oracle
 	echo "oracle:install" | chpasswd
 	echo "root:install" | chpasswd
 	sed -i "s/pam_namespace.so/pam_namespace.so\nsession    required     pam_limits.so/g" /etc/pam.d/login
-	mkdir -p -m 755 /opt/oracle/app
-	mkdir -p -m 755 /opt/oracle/oraInventory
-	mkdir -p -m 755 /opt/oracle/dpdump
-	chown -R oracle:oinstall /opt/oracle
+	mkdir -p -m 755 /u01/oracle
+	mkdir -p -m 755 /u01/oracle/oraInventory
+	mkdir -p -m 755 /u01/oracle/dpdump
+	chown -R oracle:oinstall /u01/oracle
 	cat /assets/profile >> ~oracle/.bash_profile
 	cat /assets/profile >> ~oracle/.bashrc
 

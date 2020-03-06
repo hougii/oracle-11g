@@ -34,7 +34,7 @@ oracle.install.option=INSTALL_DB_SWONLY
 # first hostname found on the system. (e.g., for systems with multiple hostnames 
 # and network interfaces)
 #-------------------------------------------------------------------------------
-ORACLE_HOSTNAME=database
+ORACLE_HOSTNAME=twdcasdb01
 
 #-------------------------------------------------------------------------------
 # Specify the Unix group to be set for the inventory directory.  
@@ -46,7 +46,7 @@ UNIX_GROUP_NAME=oinstall
 # This is an optional parameter if installing on
 # Windows based Operating System.
 #-------------------------------------------------------------------------------
-INVENTORY_LOCATION=/opt/oracle/oraInventory
+INVENTORY_LOCATION=/u01/oracle/oraInventory
 
 #-------------------------------------------------------------------------------
 # Specify the languages in which the components will be installed.             
@@ -83,17 +83,17 @@ INVENTORY_LOCATION=/opt/oracle/oraInventory
 # Specify value as the following to select all the languages.
 # Example : SELECTED_LANGUAGES=all_langs  
 #------------------------------------------------------------------------------
-SELECTED_LANGUAGES=en,fr
+SELECTED_LANGUAGES=en
 
 #------------------------------------------------------------------------------
 # Specify the complete path of the Oracle Home.
 #------------------------------------------------------------------------------
-ORACLE_HOME=/opt/oracle/app/product/11.2.0/dbhome_1
+ORACLE_HOME=/u01/oracle/product/11.2.0/db_1
 
 #------------------------------------------------------------------------------
 # Specify the complete path of the Oracle Base. 
 #------------------------------------------------------------------------------
-ORACLE_BASE=/opt/oracle/app
+ORACLE_BASE=/u01/oracle
 
 #------------------------------------------------------------------------------
 # Specify the installation edition of the component.                        
@@ -157,7 +157,7 @@ oracle.install.db.DBA_GROUP=dba
 # The OPER_GROUP is the OS group which is to be granted OSOPER privileges.
 # The value to be specified for OSOPER group is optional.
 #------------------------------------------------------------------------------
-oracle.install.db.OPER_GROUP=dba
+oracle.install.db.OPER_GROUP=oinstall
 
 #------------------------------------------------------------------------------
 # Specify the cluster node names selected during the installation.
@@ -186,17 +186,17 @@ oracle.install.db.racOneServiceName=
 #   - GENERAL_PURPOSE/TRANSACTION_PROCESSING             
 #   - DATA_WAREHOUSE                                
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.type=
+oracle.install.db.config.starterdb.type=GENERAL_PURPOSE
 
 #------------------------------------------------------------------------------
 # Specify the Starter Database Global Database Name. 
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.globalDBName=
+oracle.install.db.config.starterdb.globalDBName=ldrdev
 
 #------------------------------------------------------------------------------
 # Specify the Starter Database SID.
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.SID=
+oracle.install.db.config.starterdb.SID=ldrdev
 
 #------------------------------------------------------------------------------
 # Specify the Starter Database character set.
@@ -224,9 +224,9 @@ oracle.install.db.config.starterdb.memoryOption=true
 # Specify the total memory allocation for the database. Value(in MB) should be
 # at least 256 MB, and should not exceed the total physical memory available 
 # on the system.
-# Example: oracle.install.db.config.starterdb.memoryLimit=512
+# Example: oracle.install.db.config.starterdb.memoryLimit=
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.memoryLimit=
+oracle.install.db.config.starterdb.memoryLimit=2000
 
 #------------------------------------------------------------------------------
 # This variable controls whether to load Example Schemas onto
@@ -259,7 +259,7 @@ oracle.install.db.config.starterdb.enableSecuritySettings=true
 # This variable holds the password that is to be used for all schemas in the
 # starter database.
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.password.ALL=
+oracle.install.db.config.starterdb.password.ALL=oracle
 
 #-------------------------------------------------------------------------------
 # Specify the SYS password for the starter database.
@@ -341,7 +341,7 @@ oracle.install.db.config.starterdb.storageType=
 #
 # Applicable only when oracle.install.db.config.starterdb.storage=FILE_SYSTEM_STORAGE 
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=
+oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=/oradata
 
 #-------------------------------------------------------------------------------
 # Specify the backup and recovery location.
