@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -e
 source /assets/colorecho
-source /assets/profile
 trap "echo_red '******* ERROR: Something went wrong.'; exit 1" SIGTERM
 trap "echo_red '******* Caught SIGINT signal. Stopping...'; exit 2" SIGINT
 
@@ -15,3 +14,4 @@ echo_yellow "Installing Oracle Database 11g (11.2.0.4.0)"
 su oracle -c "/install/database/runInstaller -silent -ignorePrereq -waitforcompletion -responseFile /assets/db_install.rsp"
 /u01/oracle/oraInventory/orainstRoot.sh
 /u01/oracle/product/11.2.0/db_1/root.sh
+

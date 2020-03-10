@@ -501,7 +501,7 @@ NATIONALCHARACTERSET= "UTF8"
 # Default value : None
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-#INITPARAMS =
+#INITPARAMS ="memory_target=0,sga_target=500,pga_aggregate_target=100,java_jit_enabled=false"
 
 #-----------------------------------------------------------------------------
 # Name          : SAMPLESCHEMA
@@ -665,7 +665,7 @@ TEMPLATENAME = "My Clone TEMPLATE"
 # Default value : none
 # Mandatory     : YES
 #-----------------------------------------------------------------------------
-SOURCEDB = "orcl"
+SOURCEDB = "ldrdev"
 
 #-----------------------------------------------------------------------------
 # Name          : SYSDBAUSERNAME
@@ -684,7 +684,7 @@ SOURCEDB = "orcl"
 # Default value : none
 # Mandatory     : YES, if no OS authentication
 #-----------------------------------------------------------------------------
-#SYSDBAPASSWORD = "password"
+#SYSDBAPASSWORD = "pass.123"
 #-----------------------*** End of deleteDatabase section ***------------------------
 
 #-----------------------------------------------------------------------------

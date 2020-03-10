@@ -2,9 +2,9 @@
 
 set -e
 source /assets/colorecho
-source ~/.bashrc
+source ~oracle/.bash_profile
 
-alert_log="$ORACLE_BASE/diag/rdbms/orcl/$ORACLE_SID/trace/alert_$ORACLE_SID.log"
+alert_log="$ORACLE_BASE/diag/rdbms/ldrdev/$ORACLE_SID/trace/alert_$ORACLE_SID.log"
 listener_log="$ORACLE_BASE/diag/tnslsnr/$HOSTNAME/listener/trace/listener.log"
 pfile=$ORACLE_HOME/dbs/init$ORACLE_SID.ora
 
@@ -18,10 +18,13 @@ trap_db() {
 	trap "echo_red 'Caught SIGTERM signal, shutting down...'; stop" SIGTERM;
 	trap "echo_red 'Caught SIGINT signal, shutting down...'; stop" SIGINT;
 }
+install_listener(){
+	echo_yellow "Start install netca"
+	$ORACLE_HOME/bin/netca /silent /responseFile /assets/netca.rsp
+}
 
 start_db() {
 	echo_yellow "Starting listener..."
-	monitor $listener_log listener &
 	lsnrctl start | while read line; do echo -e "lsnrctl: $line"; done
 	MON_LSNR_PID=$!
 	echo_yellow "Starting database..."
@@ -43,7 +46,7 @@ create_db() {
 	date "+%F %T"
 	monitor $alert_log alertlog &
 	MON_ALERT_PID=$!
-	monitor $listener_log listener &
+	
 	#lsnrctl start | while read line; do echo -e "lsnrctl: $line"; done
 	#MON_LSNR_PID=$!
         echo "START DBCA"
@@ -92,6 +95,7 @@ chmod 777 /u01/oracle/dpdump
 echo "Checking shared memory..."
 df -h | grep "Mounted on" && df -h | egrep --color "^.*/dev/shm" || echo "Shared memory is not mounted."
 if [ ! -f $pfile ]; then
+  install_listener;
   create_db;
 fi 
 start_db
